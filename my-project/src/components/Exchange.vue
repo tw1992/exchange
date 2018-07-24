@@ -10,20 +10,20 @@
     <!--</div>-->
     <!--<div>-->
       <!--<ul class="ulCenter">-->
-        <!--<li class="firstLi" @click="downList(firstData)">-->
+        <!--<li class="firstLi" @click="downList(newstData)">-->
           <!--<div>-->
-            <!--<div style="white-space:nowrap;">{{firstData.currency_name}}</div>-->
-            <!--<div>{{firstData.currency_mark}}/{{areaId}}</div>-->
+            <!--<div style="white-space:nowrap;">{{newstData.currency_name}}</div>-->
+            <!--<div>{{newstData.currency_mark}}/{{areaId}}</div>-->
           <!--</div>-->
           <!--<div class="num">-->
-            <!--<span style="font-size: 22px;">{{firstData.trade.new_price}}</span>-->
-            <!--<span style="font-size: 14px;" :class="{green:(firstData.trade.change_24H) > 0,'red':(firstData.trade.change_24H) < 0}">{{(firstData.trade.change_24H) > 0?'+'+firstData.trade.change_24H:firstData.trade.change_24H}}%</span>-->
+            <!--<span style="font-size: 22px;">{{newstData.trade.new_price}}</span>-->
+            <!--<span style="font-size: 14px;" :class="{green:(newstData.trade.change_24H) > 0,'red':(newstData.trade.change_24H) < 0}">{{(newstData.trade.change_24H) > 0?'+'+newstData.trade.change_24H:newstData.trade.change_24H}}%</span>-->
           <!--</div>-->
           <!--<div class="arrow" ref="arrow">-->
             <!--<img src="../assets/img/Rectangle.png" alt="">-->
           <!--</div>-->
           <!--<div style="color: #999999;">-->
-            <!--约合 {{firstData.trade.new_price?firstData.trade.new_price*firstData.trade.price_cny:'0' | point}} CNY-->
+            <!--约合 {{newstData.trade.new_price?newstData.trade.new_price*newstData.trade.price_cny:'0' | point}} CNY-->
           <!--</div>-->
           <!--<transition name="fade">-->
             <!--<ul class="liUl" v-if="listDownUp">-->
@@ -37,7 +37,7 @@
                   <!--<span :class="{green:(item.trade.change_24H) > 0,'red':(item.trade.change_24H) < 0}">{{(item.trade.change_24H)>0?'+'+item.trade.change_24H:item.trade.change_24H}}%</span>-->
                 <!--</div>-->
                 <!--<div style="color: #999999;">-->
-                  <!--约合 {{firstData.trade.new_price?firstData.trade.new_price*firstData.trade.price_cny:'0' | point}} CNY-->
+                  <!--约合 {{newstData.trade.new_price?newstData.trade.new_price*newstData.trade.price_cny:'0' | point}} CNY-->
                 <!--</div>-->
               <!--</li>-->
             <!--</ul>-->
@@ -45,17 +45,17 @@
         <!--</li>-->
         <!--<li class="width">-->
           <!--<div>最低({{areaId}})</div>-->
-          <!--<div>{{firstData.trade.min_price}}</div>-->
-          <!--<div style="color: #999999;">约合 {{firstData.trade.min_price?firstData.trade.min_price*firstData.trade.price_cny:'0' | point}} CNY</div>-->
+          <!--<div>{{newstData.trade.min_price}}</div>-->
+          <!--<div style="color: #999999;">约合 {{newstData.trade.min_price?newstData.trade.min_price*newstData.trade.price_cny:'0' | point}} CNY</div>-->
         <!--</li>-->
         <!--<li class="width">-->
           <!--<div>最高({{areaId}})</div>-->
-          <!--<div>{{firstData.trade.max_price}}</div>-->
-          <!--<div style="color: #999999;">约合 {{firstData.trade.max_price?firstData.trade.max_price*firstData.trade.price_cny:'0' | point}} CNY</div>-->
+          <!--<div>{{newstData.trade.max_price}}</div>-->
+          <!--<div style="color: #999999;">约合 {{newstData.trade.max_price?newstData.trade.max_price*newstData.trade.price_cny:'0' | point}} CNY</div>-->
         <!--</li>-->
         <!--<li class="width">-->
           <!--<div>24H成交量</div>-->
-          <!--<div>{{firstData.trade.done_num_24H}}</div>-->
+          <!--<div>{{newstData.trade.done_num_24H}}</div>-->
         <!--</li>-->
       <!--</ul>-->
     <!--</div>-->
@@ -331,7 +331,7 @@
         <!--areaId:this.$route.params.area_currency_id,  //areaId  currencyId-->
         <!--currencyId:this.$route.params.currency_mark,  //-->
         <!--listDownUp:false,-->
-        <!--firstData:{trade:{}},-->
+        <!--newstData:{trade:{}},-->
         <!--listBackground:0,-->
         <!--type:'pend',-->
         <!--sellDateOri:[],-->
@@ -493,7 +493,7 @@
         <!--})[0].list;-->
         <!--this.changeSpecialArea.filter(function(data,index){-->
           <!--if(data.currency_mark == that.currencyId){-->
-            <!--that.firstData = data;-->
+            <!--that.newstData = data;-->
             <!--that.listBackground = index;-->
           <!--}-->
         <!--});-->
@@ -715,9 +715,9 @@
         <!--}-->
       <!--},-->
       <!--chooseList(data,index){  //选择下拉列表-->
-        <!--if(data.currency_id != this.firstData.currency_id){-->
+        <!--if(data.currency_id != this.newstData.currency_id){-->
           <!--this.websock.send(JSON.stringify({type:'out',name:'currency',room_id:this.areaId  + '/' + this.currencyId}));-->
-          <!--this.firstData = data;-->
+          <!--this.newstData = data;-->
           <!--this.listBackground = index;-->
           <!--this.currencyId = data.currency_mark;-->
           <!--var that  = this;-->
@@ -745,14 +745,14 @@
           <!--this.$refs.underline.style.left = 145*index + 'px';-->
           <!--var that = this;-->
           <!--this.listBackground = 0;-->
-          <!--this.currencyId = this.firstData.currency_mark;-->
+          <!--this.currencyId = this.newstData.currency_mark;-->
           <!--this.changeSpecialArea = this.webDate.body.home.filter(function(data){-->
             <!--if(data.currency_mark == that.areaId){-->
               <!--return data;-->
             <!--}-->
           <!--})[0].list;-->
-          <!--this.firstData = this.changeSpecialArea[that.listBackground];-->
-          <!--this.currencyId = this.firstData.currency_mark;-->
+          <!--this.newstData = this.changeSpecialArea[that.listBackground];-->
+          <!--this.currencyId = this.newstData.currency_mark;-->
           <!--this.getOrdersMember_name();-->
           <!--this.kline.setSymbol(that.areaId+'/'+that.currencyId);-->
           <!--this.inputmodel = {buy:'',num:'',totalPrice:'',handFee:0};-->
@@ -1368,37 +1368,34 @@
           <div class="dot"></div>
           <div>
             <div>
-              COC/BTC
+              {{symbol}}
             </div>
             <div>
-              量：8.32
+              量：{{newstData.trade.done_num_24H}}
             </div>
             <div>
-              低：0.001203
+              低：{{newstData.trade.min_price}}
             </div>
           </div>
           <div>
             <div>
-              0.00123
+              {{newstData.trade.new_price}}
             </div>
             <div>
-              涨幅：0.89%
+              涨幅：{{newstData.trade.change_24H}}
             </div>
             <div>
-              高：0.001203
+              高：{{newstData.trade.max_price}}
             </div>
           </div>
         </div>
-        <div style="background: #1C1A13;">
-          <div style="display: -webkit-flex; /* Safari */
-  display: flex;align-items: center;justify-content: space-between;">
+        <div class="search">
+          <div>
             <span style="display:block">市场</span>
             <el-input suffix-icon="el-icon-search" size="mini" style="width: 105px;"></el-input>
           </div>
           <ul class="symbolTab clear">
-            <li>BTC</li>
-            <li>BTC</li>
-            <li>BTC</li>
+            <li v-for="item in webDate.body.home">{{item.currency_mark}}</li>
             <li><img src="../assets/img/starLight.png" alt=""></li>
           </ul>
         </div>
@@ -1619,7 +1616,7 @@
             涨幅：+0.89%   高：0.001279   低：0.001203   24h量：8.388 BTC
           </div>
         </div>
-        <div id="kline_container" ref="kline_container" style="height: calc(100% - 60px)"></div>
+        <div id="kline_container" ref="kline_container"></div>
       </div>
       <!--委托面板-->
       <div style="height: calc(50% - 10px);background: #21201A;margin-top: 10px;color: #FFFFFF;">
@@ -1984,7 +1981,7 @@
         areaId:this.$route.params.area_currency_id,  //areaId  currencyId
         currencyId:this.$route.params.currency_mark,  //
         listDownUp:false,
-        firstData:{trade:{}},
+        newstData:{trade:{}},
         listBackground:0,
         type:'pend',
         sellDateOri:[],
@@ -2025,53 +2022,47 @@
         inputValuePoint:4,
         currentDepute:[{id:1,time:'15:33:00'},{id:1,time:'15:33:00'},{id:1,time:'15:33:00'},{id:1,time:'15:33:00'},{id:1,time:'15:33:00'},{id:1,time:'15:33:00'}],
         historyDepute:[],
+
+        market:'',
+        coin:'',
+        symbol:'',
       }
     },
-    created(){
-      this.$nextTick(function(){
-        var that = this;
-        setTimeout(function(){
-          var clientWidth = that.$refs.kline_container.offsetWidth;
-          var clientHeight = that.$refs.kline_container.offsetHeight;
-          that.kline = new Kline({
-            element: "#kline_container",
-            width: clientWidth,
-            height: clientHeight,
-            theme: 'dark', // light/dark
-            language: 'zh-cn', // zh-cn/en-us/zh-tw
-            ranges: ["1w", "1d", "1h", "30m", "15m", "5m", "1m", "line"],
-            symbol: that.areaId + '/' + that.currencyId,
-            symbolName: "COIN5_COIN4",
-            type: "poll",
-//            url: window.location.host.indexOf('bjex')>-1?window.location.protocol+"//"+window.location.host+"/Api/Area/getOrdersKline1":'http://192.168.2.96:81/Api/Area/getOrdersKline1',
-            url: 'http://www.bjex.io/Api/Area/getOrdersKline1',
-            limit: 1000,
-            intervalTime: 5000,
-            debug: false,
-            showTrade: false,
-            onResize: function(width, height){}
-          });
-
-          that.kline.draw();
-        },100)
-      });
+    mounted(){
       var that = this;
-      that.area_currency_member(that.$route.params.currency_mark,that.$route.params.area_currency_id);
+      this.market = this.$route.params.currency_mark;
+      this.coin = this.$route.params.area_currency_id;
+      this.symbol = this.coin + '/' + this.market;
+      var clientWidth = that.$refs.kline_container.offsetWidth;
+      var clientHeight = that.$refs.kline_container.offsetHeight;
+      that.kline = new Kline({
+        element: "#kline_container",
+        width: clientWidth,
+        height: clientHeight,
+        theme: 'dark',
+        language: 'zh-cn', // zh-cn/en-us/zh-tw
+        ranges: ["1w", "1d", "1h", "30m", "15m", "5m", "1m", "line"],
+        symbol: that.symbol,
+        symbolName:that.symbol,
+        type: "poll",
+        url: (window.location.host.indexOf('192.168') == -1 && window.location.host.indexOf('127.0') == -1)?window.location.protocol+"//"+window.location.host+"/Api/Area/getOrdersKline1":'http://www.bjex.io/Api/Area/getOrdersKline1',
+        limit: 1000,
+        intervalTime: 5000,
+        debug: false,
+        showTrade: false,
+      });
+      that.kline.draw();
+      window.onresize = ()=> {
+        var clientWidth = that.$refs.kline_container.offsetWidth;
+        var clientHeight = that.$refs.kline_container.offsetHeight;
+        that.kline.resize(clientWidth,clientHeight);
+      };
+      that.area_currency_member(that.market,that.coin);
       this.initWebSocket()
-    },
-    beforeRouteLeave(to,form,next){
-      this.kline.pause();
-      this.websocketclose();
-      next();
     },
     methods:{
       initWebSocket(){
-        if(window.location.host.indexOf('192.168') == -1 && window.location.host.indexOf('127.0') == -1){
-          var webSocketUrl = this.resUrl('online')
-        }else{
-//            var webSocketUrl = "ws:"+ this.resUrl().ws;
-          var webSocketUrl = this.resUrl()
-        }
+        var webSocketUrl = this.resUrl();
         webSocketUrl.then((res)=>{
           var webSocketUrl = res.ws;
           this.websock = new WebSocket(webSocketUrl);
@@ -2086,13 +2077,13 @@
           return;
         }
         if(response.login == 'success'){
-          var room_id = this.$route.params.area_currency_id  + '/' + this.$route.params.currency_mark;
+          var room_id = this.coin  + '/' + this.market;
           this.websock.send(JSON.stringify({type:'login',name:'currency',room_id:room_id}));
           return;
         }
         if(response.login == 'out_success'){
           this.scrollTop = '';
-          this.websock.send(JSON.stringify({type:'login',name:'currency',room_id:this.areaId  + '/' + this.currencyId}));
+          this.websock.send(JSON.stringify({type:'login',name:'currency',room_id:this.market  + '/' + this.coin}));
           return;
         }
         if(!response.login || response.login != 'success'){
@@ -2129,8 +2120,8 @@
         return obj;
       },
       handWebRes(response){
-        this.newstChange = false;
         var that = this;
+        this.newstChange = false;
         var indexUnderLine = 0;
         this.webDate = response;
         this.buyDateOri = response.body.list.buy;
@@ -2146,7 +2137,7 @@
         })[0].list;
         this.changeSpecialArea.filter(function(data,index){
           if(data.currency_mark == that.currencyId){
-            that.firstData = data;
+            that.newstData = data;
             that.listBackground = index;
           }
         });
@@ -2368,9 +2359,9 @@
         }
       },
       chooseList(data,index){  //选择下拉列表
-        if(data.currency_id != this.firstData.currency_id){
+        if(data.currency_id != this.newstData.currency_id){
           this.websock.send(JSON.stringify({type:'out',name:'currency',room_id:this.areaId  + '/' + this.currencyId}));
-          this.firstData = data;
+          this.newstData = data;
           this.listBackground = index;
           this.currencyId = data.currency_mark;
           var that  = this;
@@ -2398,14 +2389,14 @@
           this.$refs.underline.style.left = 145*index + 'px';
           var that = this;
           this.listBackground = 0;
-          this.currencyId = this.firstData.currency_mark;
+          this.currencyId = this.newstData.currency_mark;
           this.changeSpecialArea = this.webDate.body.home.filter(function(data){
             if(data.currency_mark == that.areaId){
               return data;
             }
           })[0].list;
-          this.firstData = this.changeSpecialArea[that.listBackground];
-          this.currencyId = this.firstData.currency_mark;
+          this.newstData = this.changeSpecialArea[that.listBackground];
+          this.currencyId = this.newstData.currency_mark;
           this.getOrdersMember_name();
           this.kline.setSymbol(that.areaId+'/'+that.currencyId);
           this.inputmodel = {buy:'',num:'',totalPrice:'',handFee:0};
@@ -2563,7 +2554,12 @@
       formatTooltip(val){
         return val + '%';
       }
-    }
+    },
+    beforeRouteLeave(to,form,next){
+      this.kline.pause();
+      this.websocketclose();
+      next();
+    },
   }
 </script>
 <style>
@@ -2573,12 +2569,20 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding:10px 0;
+  }
+  .symbol>div:nth-of-type(1){
+    float: left;
+    margin-left:8px;
   }
   .symbol>div:nth-of-type(2){
-    width: 30%;
+    width: 41%;
+    float: left;
+    white-space:nowrap;
   }
   .symbol>div:nth-of-type(3){
-    width: 40%;
+    width: 38%;
+    float: right;
   }
   .dot{
     width: 30px;
@@ -2628,6 +2632,31 @@
   }
   .deputeTabRight{
     float: right;
+  }
+  .el-slider__button{
+    width: 12px;
+    height: 12px;
+  }
+  .search{
+    background: #1C1A13;padding-top: 10px;
+  }
+  .search > div{
+    display: -webkit-flex; /* Safari */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .search .el-input__inner{
+    background: #1C1A13;
+  }
+  .search .el-input--mini .el-input__inner{
+    height: 26px;
+  }
+  #kline_container{
+    height: calc(100% - 60px)!important;
+  }
+  #kline_container .trade_container dark hide{
+    display: none;
   }
 </style>
 
